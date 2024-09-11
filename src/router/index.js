@@ -13,6 +13,16 @@ const router = createRouter({
       path: '/databind',
       name: 'databind',
       component: () => import('../views/Databind.vue')
+    },
+    {
+      path: '/vif',
+      name: 'vif',
+      component: () => import('../views/Vif.vue')
+    },
+    {
+      path: '/vshow',
+      name: 'vshow',
+      component: () => import('../views/Vshow.vue')
     }
   ]
 })

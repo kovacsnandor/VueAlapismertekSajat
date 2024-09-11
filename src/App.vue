@@ -12,6 +12,8 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav class="my-border p-4">
       <RouterLink to="/">Home</RouterLink> | 
       <RouterLink to="/databind">Data bind</RouterLink> | 
+      <RouterLink to="/vif">v-if</RouterLink> | 
+      <RouterLink to="/vshow">v-show</RouterLink> | 
     </nav>
     
     <!-- Ide tölti be a eblapokat -->
