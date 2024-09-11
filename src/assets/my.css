@@ -5,3 +5,7 @@
 .my-border {
   border: 1px dashed black;;
 }
+
+.my-pointer{
+  cursor: pointer;
+}
