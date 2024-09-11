@@ -35,6 +35,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 //Icons: css
 import "bootstrap-icons/font/bootstrap-icons.min.css"
-``
+```
 
-
+# Direktívák (directives)
+branch: 01_directives
+Olyan vue html attrivútumok, amik v- előtaggal kezdődnek.
+v-bind, v-if, v-show, v-for, v-on, v-model (:, @)
