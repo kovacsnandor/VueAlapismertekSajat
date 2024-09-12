@@ -14,6 +14,9 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/databind">Data bind</RouterLink> | 
       <RouterLink to="/vif">v-if</RouterLink> | 
       <RouterLink to="/vshow">v-show</RouterLink> | 
+      <RouterLink to="/vfor">v-for</RouterLink> | 
+      <RouterLink to="/von">v-on</RouterLink> | 
+      <RouterLink to="/cssbinding">css binding</RouterLink> | 
     </nav>
     
     <!-- Ide tölti be a eblapokat -->

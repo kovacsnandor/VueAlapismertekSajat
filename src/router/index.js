@@ -23,6 +23,21 @@ const router = createRouter({
       path: '/vshow',
       name: 'vshow',
       component: () => import('../views/Vshow.vue')
+    },
+    {
+      path: '/vfor',
+      name: 'vfor',
+      component: () => import('../views/Vfor.vue')
+    },
+    {
+      path: '/von',
+      name: 'von',
+      component: () => import('../views/Von.vue')
+    },
+    {
+      path: '/cssbinding',
+      name: 'cssbinding',
+      component: () => import('../views/Cssbinding.vue')
     }
   ]
 })
