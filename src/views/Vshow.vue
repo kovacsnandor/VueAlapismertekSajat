@@ -17,7 +17,19 @@
             ></i>
         </div>
     </div>
-    <button type="button" class="btn btn-primary">üzenet</button>
+
+    <div class="alert alert-danger" role="alert" v-if="showAutoMessage" id="show3">
+            <div class="d-flex justify-content-between">
+                {{showAutoMessage}}
+            <i class="bi bi-x-lg my-pointer"
+                @click="onClickX3()"
+            ></i>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary"
+        @click="uzenetIndit('Ez egy üzenet')"
+    >üzenet</button>
 
   </div>
 </template>
@@ -28,7 +40,9 @@ export default {
         return {
             show1: true,
             show2: true,
-            showAutoMessage: null
+            showAutoMessage: null,
+            showTime: 3000,
+            setTimoutId: null
         }
     },
     methods: {
@@ -37,6 +51,17 @@ export default {
         },
         onClickX2(){
             this.show2=false;
+        },
+        onClickX3(){
+            this.showAutoMessage=null;
+            clearTimeOut(this.setTimoutId);
+        },
+        uzenetIndit(uzenet){
+            this.showAutoMessage= uzenet;
+            clearTimeOut(this.setTimoutId);
+            this.setTimoutId=setTimeout(()=>{
+                this.showAutoMessage= null;
+            },this.showTime)
         }
     }
 };
