@@ -38,6 +38,16 @@ const router = createRouter({
       path: '/cssbinding',
       name: 'cssbinding',
       component: () => import('../views/Cssbinding.vue')
+    },
+    {
+      path: '/computed',
+      name: 'computed',
+      component: () => import('../views/Computed.vue')
+    },
+    {
+      path: '/watch',
+      name: 'watch',
+      component: () => import('../views/Watch.vue')
     }
   ]
 })

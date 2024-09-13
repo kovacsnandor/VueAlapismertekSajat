@@ -1,6 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
@@ -10,21 +9,23 @@ import { RouterLink, RouterView } from 'vue-router'
     <!-- Menü -->
 
     <nav class="my-border p-4">
-      <RouterLink to="/">Home</RouterLink> | 
-      <RouterLink to="/databind">Data bind</RouterLink> | 
-      <RouterLink to="/vif">v-if</RouterLink> | 
-      <RouterLink to="/vshow">v-show</RouterLink> | 
-      <RouterLink to="/vfor">v-for</RouterLink> | 
-      <RouterLink to="/von">v-on</RouterLink> | 
-      <RouterLink to="/cssbinding">css binding</RouterLink> | 
+      <RouterLink to="/">Home</RouterLink> |
+      <RouterLink to="/databind">Data bind</RouterLink> |
+      <RouterLink to="/vif">v-if</RouterLink> |
+      <RouterLink to="/vshow">v-show</RouterLink> |
+      <RouterLink to="/vfor">v-for</RouterLink> |
+      <RouterLink to="/von">v-on</RouterLink> |
+      <RouterLink to="/cssbinding">css binding</RouterLink> |
+      <RouterLink to="/computed">Computed</RouterLink> |
+      <RouterLink to="/watch">Watch</RouterLink> |
     </nav>
-    
-    <!-- Ide tölti be a eblapokat -->
-    <RouterView class="my-border p-3"/>
 
+    <!-- Ide tölti be a eblapokat -->
+    <div class="my-border p-3">
+      <RouterView />
+    </div>
   </div>
 </template>
 
 <style scoped>
-
 </style>
