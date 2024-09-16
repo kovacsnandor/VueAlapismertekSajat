@@ -13,7 +13,8 @@ export default {
     
     <nav class="my-border p-4">
       <RouterLink to="/">Home</RouterLink> | 
-      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/szulotogyerek">Szülő -> Gyerek</RouterLink> |
+      <RouterLink to="/szuloodavisszagyerek">Szülő &lt;-&gt; Gyerek</RouterLink>
     </nav>
     
     <div class="my-border p-2">
