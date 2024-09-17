@@ -3,26 +3,19 @@
     <h2>{{ nev }}</h2>
     <p>Kérdés: {{ kerdes }}</p>
 
-    <p>
-      Válaszolj:
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="onClickKulddButton()"
-      >
-        Küldd
-      </button>
-    </p>
     <div class="mb-3">
       <label for="uzenet" class="form-label"
-        >Email address</label
-      >
-      <input
-        type="email"
-        class="form-control"
-        id="uzenet"
-        v-model="uzenet"
-      />
+        >Válasz:
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="onClickKulddButton()"
+          v-if="kerdes && valasz"
+        >
+          Küldd
+        </button>
+      </label>
+      <input type="email" class="form-control" id="uzenet" v-model="valasz" />
     </div>
   </div>
 </template>
@@ -32,11 +25,23 @@ export default {
   props: ["nev", "kerdes"],
   data() {
     return {
-      uzenet: null,
+      valasz: null,
     };
   },
   methods: {
-    onClickKulddButton() {},
+    onClickKulddButton() {
+      this.uzenoFalraKuld();
+    },
+    uzenoFalraKuld() {
+      if (this.valasz) {
+        //Saját esemény kiváltása
+        this.$emit("uzenoFal", {
+          nev: this.nev,
+          valasz: this.valasz,
+        });
+        this.valasz = null;
+      }
+    },
   },
 };
 </script>
@@ -44,7 +49,7 @@ export default {
 <style scoped>
 .my-doboz {
   width: 200px;
-  height: 235px;
+  height: 210px;
   padding: 5px;
   margin: 10px;
   background: lightskyblue;
