@@ -68,3 +68,21 @@ app.mount('#app')
 
 ```
 
+## mitt kommunikáció
+1. feliratkozás az eseményre (Az esemény veve: gyerek_to_gyerek)
+Az eseményt bármely komponenseben el lehet kapni
+```js
+mounted(){
+    //A data tartalmaézzza a külött üzenet objektumot
+    this.emitter.on("gyerek_to_gyerek", (data) => {
+          
+        }
+    });
+```
+
+2. Az esemény kiváltása
+Az üzenetet egy objektumba kell csomagolni.
+```js
+this.emitter.emit("gyerek_to_gyerek", {uzenet: "Ez egy üzenet"});
+
+```
