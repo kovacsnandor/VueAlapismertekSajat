@@ -14,7 +14,9 @@ export default {
     <nav class="my-border p-4">
       <RouterLink to="/">Home</RouterLink> | 
       <RouterLink to="/szulotogyerek">Szülő -> Gyerek</RouterLink> |
-      <RouterLink to="/szuloodavisszagyerek">Szülő &lt;-&gt; Gyerek</RouterLink>
+      <RouterLink to="/szuloodavisszagyerek">Szülő &lt;-&gt; Gyerek</RouterLink> | 
+      <RouterLink to="/gyerekodavisszagyerek">Gyerek &lt;-&gt; Gyerek</RouterLink> | 
+      <RouterLink to="/sokgyerekgyerek">Sok Gyerek &lt;-&gt; Gyerek</RouterLink> | 
     </nav>
     
     <div class="my-border p-2">

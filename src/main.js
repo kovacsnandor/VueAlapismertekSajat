@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 //Icons: css
 import "bootstrap-icons/font/bootstrap-icons.min.css"
-import mitt from mitt;
+import mitt from 'mitt';
 
 const emitter = mitt()
 const app = createApp(App)
