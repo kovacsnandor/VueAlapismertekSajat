@@ -28,7 +28,12 @@
       </option>
     </select>
     <!-- válasz -->
-    <p>{{kiKuldte}}: {{ valasz }}</p>
+    <!-- <p>{{kiKuldte}}: {{ valasz }}</p> -->
+    <ul class="list-group mt-2">
+      <li class="list-group-item"
+        v-for="(valasz,i) in valaszok" :key="i"
+      >{{valasz}}</li>
+    </ul>
   </div>
 </template>
 
@@ -39,9 +44,10 @@ export default {
     return {
       uzenet: null,
       valasz: null,
+      valaszok: [],
       kivalasztottGyerekId: null, //Ennek küldjük az üzenetet
       kivalasztottGyerekekId: [], //Ennek küldjük az üzenetet
-      kiKuldte: null
+      kiKuldte: null,
     };
   },
   mounted() {
@@ -49,11 +55,12 @@ export default {
     //feliratkozunk a gyerek2_to_gyerek1 eseményre
     //az eseményt kezelő függvénnyel
     this.emitter.on("gyerek_to_gyerek", (data) => {
-      if (data.kinekKuldik == this.gyerek.id) {
+      if (data.kiknekKuldik.includes(this.gyerek.id)) {
         this.valasz = data.uzenet;
-        this.kiKuldte = this.gyerekek.find(g => g.id==data.kiKuldi).nev
+        this.kiKuldte = this.gyerekek.find((g) => g.id == data.kiKuldi).nev;
+        this.valaszok.push(this.kiKuldte + ": " + this.valasz);
       }
-     });
+    });
   },
   methods: {
     onClickKuldButton() {
@@ -64,27 +71,29 @@ export default {
       //és az kapja el, aki erre feliratkozott
       this.emitter.emit("gyerek_to_gyerek", {
         kiKuldi: this.gyerek.id,
-        kinekKuldik: this.kivalasztottGyerekId,
+        kiknekKuldik: this.kivalasztottGyerekekId,
         uzenet: this.uzenet,
       });
     },
   },
   computed: {
-    tobbiek(){
-      return this.gyerekek.filter((g) =>{
-       return g.id != this.gyerek.id
-      }).sort((g1,g2)=>{
-        return g1.nev.localeCompare(g2.nev)
-      })
-    }
-  }
+    tobbiek() {
+      return this.gyerekek
+        .filter((g) => {
+          return g.id != this.gyerek.id;
+        })
+        .sort((g1, g2) => {
+          return g1.nev.localeCompare(g2.nev);
+        });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .my-doboz {
   width: 300px;
-  height: 255px;
+  /* height: 255px; */
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
