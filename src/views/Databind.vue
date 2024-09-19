@@ -2,7 +2,11 @@
   <div>
     <h2>Data Bind</h2>
     <p>
-      {{ szoveg }} | {{ listaKivalasztottElem }} | {{ kenyer }}, {{ kifli }} |
+      {{ szoveg }} | 
+      {{ listaKivalasztottElem }} | 
+      {{ listaKivalasztottElemek }} | 
+      {{ kenyer }}, 
+      {{ kifli }} |
       {{ neme }} |
       {{ range }} |
     </p>
@@ -24,6 +28,25 @@
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
+    </select>
+
+    <!-- Multi lista -->
+    <h3>Multi Lista</h3>
+    <select
+      class="form-select"
+      aria-label="Default select example"
+      v-model="listaKivalasztottElemek"
+      size="6"
+      multiple
+    >
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+      <option value="4">Five</option>
+      <option value="5">Valami</option>
+      <option value="6">Akármi</option>
+      <option value="7">Doboz</option>
+      <option value="8">Kutya</option>
     </select>
 
     <!-- checkbox -->
@@ -88,6 +111,7 @@ export default {
     return {
       szoveg: "szöveg",
       listaKivalasztottElem: 2,
+      listaKivalasztottElemek: ["3", "5"],
       kenyer: false,
       kifli: true,
       neme: "fiú",
