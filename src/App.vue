@@ -17,10 +17,11 @@ export default {
       <RouterLink to="/szuloodavisszagyerek">Szülő &lt;-&gt; Gyerek</RouterLink> | 
       <RouterLink to="/gyerekodavisszagyerek">Gyerek &lt;-&gt; Gyerek</RouterLink> | 
       <RouterLink to="/sokgyerekgyerek">Sok Gyerek &lt;-&gt; Gyerek</RouterLink> | 
+      <RouterLink to="/provideinject">Provide Inject</RouterLink> | 
     </nav>
     
     <div class="my-border p-2">
-      <RouterView />
+      <RouterView/>
     </div>
   </div>
 </template>

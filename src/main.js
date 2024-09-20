@@ -21,4 +21,6 @@ app.use(router)
 
 app.config.globalProperties.emitter = emitter
 
+app.provide('url', 'http://localhost:3000')
+
 app.mount('#app')

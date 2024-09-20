@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/sokgyerekgyerek',
       name: 'sokgyerekgyerek',
       component: () => import('../views/SokGyerekGyerek.vue')
+    },
+    {
+      path: '/provideinject',
+      name: 'provideinject',
+      component: () => import('../views/ProvideInject.vue')
     }
   ]
 })
