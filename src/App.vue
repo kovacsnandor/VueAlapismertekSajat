@@ -13,7 +13,10 @@ export default {
     
     <nav class="my-border p-4">
       <RouterLink to="/">Home</RouterLink> | 
-      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/globaliskomponens">Globális komponens</RouterLink> | 
+      <RouterLink to="/dinamikuskomponens">Dinamikus komponens</RouterLink> | 
+      <RouterLink to="/slots">Slots</RouterLink> | 
+      <RouterLink to="/tegla">Tégla</RouterLink> | 
     </nav>
     
     <div class="my-border p-2">
@@ -21,6 +24,7 @@ export default {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 
