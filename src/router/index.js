@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/tegla',
       name: 'tegla',
       component: () => import('../views/Tegla.vue')
+    },
+    {
+      path: '/listapakolo',
+      name: 'listapakolo',
+      component: () => import('../views/ListaPakolo.vue')
     }
   ]
 })

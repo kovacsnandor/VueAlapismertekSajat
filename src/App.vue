@@ -17,6 +17,7 @@ export default {
       <RouterLink to="/dinamikuskomponens">Dinamikus komponens</RouterLink> | 
       <RouterLink to="/slots">Slots</RouterLink> | 
       <RouterLink to="/tegla">Tégla</RouterLink> | 
+      <RouterLink to="/listapakolo">Lista pakoló</RouterLink> | 
     </nav>
     
     <div class="my-border p-2">

@@ -1,5 +1,7 @@
 <template>
   <h3>Tégla: {{ countOfteglak }} db</h3>
+
+  <!-- Button + tégla -->
   <button
     type="button"
     class="btn btn-success"
@@ -9,6 +11,8 @@
   >
     + tégla
   </button>
+
+  <!-- Button - tégla -->
   <button
     type="button"
     class="btn btn-danger ms-2"
@@ -18,6 +22,8 @@
   >
     - tégla
   </button>
+
+  <!-- A téglák -->
   <div class="mt-3">
     <img
       class="my-tegla"
@@ -28,6 +34,7 @@
     />
   </div>
 
+  <!-- Modal yes no -->
   <ModalYesNo
     :title="'Kérdés'"
     :yes="'Igen'"
@@ -52,7 +59,8 @@ export default {
     };
   },
   methods: {
-    
+    //A valamilyenAkcio eseménykezelője
+    //Hoozárak vagy elvesz téglát
     teglaHozzarakElvesz() {
       if (this.teglaKivesz) {
         this.teglak.pop();
