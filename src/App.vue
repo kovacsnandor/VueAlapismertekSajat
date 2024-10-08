@@ -8,10 +8,17 @@ export default {
       searchWord: computed(() => this.searchWord),
     };
   },
-
+  watch: {
+    searchWordInput(data){
+      if (!data) {
+        this.searchWord = null;
+      }
+    }
+  },
   data() {
     return {
       searchWord: null,
+      searchWordInput: null,
     };
   },
 };
@@ -44,9 +51,11 @@ export default {
           type="search"
           placeholder="Search"
           aria-label="Search"
-          v-model="searchWord"
+          v-model="searchWordInput"
         />
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-success" type="submit"
+          @click="searchWord = searchWordInput"
+        >Search</button>
       </div>
     </nav>
 

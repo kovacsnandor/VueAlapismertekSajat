@@ -2,9 +2,9 @@
   <h2>v-slot, Halkártyák</h2>
   <p>{{ searchWord }}</p>
   <!-- Kártyák -->
-  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4" v-if="szurtHalak.length>0">
     <HalKartya
-      v-for="hal in halak"
+      v-for="hal in szurtHalak"
       :key="hal.id"
       :id="hal.id"
       @reszletekModalKezeles="reszletekModalKezelo"
@@ -18,6 +18,7 @@
       </template>
     </HalKartya>
   </div>
+  <div v-if="szurtHalak.length==0"> Nincs találat</div>
 
   <!-- Hal info modal -->
   <HalInfo :title="keresJelol(kivalasztottHal.title)">
@@ -56,7 +57,7 @@ export default {
           title: "Bodorka",
           image: "bodorka.jpg",
           text: [
-            "Hazánk minden vizében megtalálható. Rendkívül jól alkalmazkodó kistermetű halfaj, kifejlett példányai legtöbbször 10-18 cm-esek. Oldalról lapított testű, nem túl magas hátú hal, melynek szája csúcsba nyíló, középállású. A has- és hátúszók első sugarai a hal hossztengelyére merőlegesen egy vonalba esnek, míg a nagyon hasonló vörösszárnyú keszeg a hátúszójának első sugara nem esik egybe a hasúszó alapvonalával.",
+            "Hazánk mInDen vizében megtalálható. Rendkívül jól alkalmazkodó kistermetű halfaj, kifejlett példányai legtöbbször 10-18 cm-esek. Oldalról lapított testű, nem túl magas hátú hal, melynek szája csúcsba nyíló, középállású. A has- és hátúszók első sugarai a hal hossztengelyére merőlegesen egy vonalba esnek, míg a nagyon hasonló vörösszárnyú keszeg a hátúszójának első sugara nem esik egybe a hasúszó alapvonalával.",
             "A hasvonal, a has- és a farokalatti úszók között hengeres, él nincs rajta. Szemgyűrűje halvány narancssárgától az élénk narancsvörösig változik, a háta zöldesszürke, a hasa fehéres, a páros úszók enyhén vörhenyesek, a páratlanok szürkésvörösek. Oldalvonalán 40-46 pikkely számlálható. Rovarlárvákat, apró csigákat, planktonrákokat, hínárhajtásokat fogyaszt. Április elején, 10-12°C-os vízhőmérsékleten csoportosan ívik",
           ],
         },
@@ -136,6 +137,15 @@ export default {
       }
       return this.kivalasztottHal.text.map((t) => `<p>${t}</p>`).join("");
     },
+    szurtHalak(){
+      if (!this.searchWord) {
+        return this.halak;
+      }
+      return this.halak.filter(h => {
+        return h.title.toLowerCase().includes(this.searchWord.toLowerCase()) ||
+        h.text.some(t => t.toLowerCase().includes(this.searchWord.toLowerCase()))
+      });
+    }
   },
 };
 </script>
