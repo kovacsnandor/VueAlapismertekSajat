@@ -1,5 +1,6 @@
 <template>
   <h2>v-slot, Halkártyák</h2>
+  <p>{{searchWord}}</p>
   <!-- Kártyák -->
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
     <HalKartya
@@ -45,6 +46,7 @@ export default {
     HalKartya,
     HalInfo,
   },
+  inject: ['searchWord'],
   data() {
     return {
       kivalasztottHal: new Hal(),

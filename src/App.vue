@@ -1,12 +1,19 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
+import { computed } from "vue";
+
 export default {
-  data(){
+  provide() {
+    return {
+      searchWord: computed(() => this.searchWord),
+    };
+  },
+
+  data() {
     return {
       searchWord: null,
-    }
-  }
-
+    };
+  },
 };
 </script>
 
@@ -14,7 +21,9 @@ export default {
   <div class="container-fluid my-border my-container">
     <h1>Témakör</h1>
 
-    <nav class="my-border p-4 d-flex justify-content-between align-items-center">
+    <nav
+      class="my-border p-4 d-flex justify-content-between align-items-center"
+    >
       <div>
         <RouterLink to="/">Home</RouterLink> |
         <RouterLink to="/globaliskomponens">Globális komponens</RouterLink> |
