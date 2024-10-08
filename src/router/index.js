@@ -7,39 +7,50 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
       path: '/globaliskomponens',
       name: 'globaliskomponens',
-      component: () => import('../views/GlobalisKomponens.vue')
+      component: () => import('../views/GlobalisKomponens.vue'),
+      meta: { title: 'Global && Local'}
     },
     {
       path: '/dinamikuskomponens',
       name: 'dinamikuskomponens',
-      component: () => import('../views/DinamikusKomponens.vue')
+      component: () => import('../views/DinamikusKomponens.vue'),
+      meta: { title: 'Dinamikus'}
     },
     {
       path: '/slots',
       name: 'slots',
-      component: () => import('../views/Slots.vue')
+      component: () => import('../views/Slots.vue'),
+      meta: { title: 'slot'}
     },
     {
       path: '/tegla',
       name: 'tegla',
-      component: () => import('../views/Tegla.vue')
+      component: () => import('../views/Tegla.vue'),
+      meta: { title: 'Tégla'}
     },
     {
       path: '/listapakolo',
       name: 'listapakolo',
-      component: () => import('../views/ListaPakolo.vue')
+      component: () => import('../views/ListaPakolo.vue'),
+      meta: { title: 'Lista pkoló'}
     },
     {
       path: '/vslot',
       name: 'vslot',
-      component: () => import('../views/Vslot.vue')
+      component: () => import('../views/Vslot.vue'),
+      meta: { title: 'vslot'}
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  document.title=  to.meta.title ? `${to.meta.title} - Komponensek` : 'Komponensek';
+  next();
 })
 
 export default router
