@@ -18,6 +18,8 @@ export default {
       <RouterLink to="/slots">Slots</RouterLink> | 
       <RouterLink to="/tegla">Tégla</RouterLink> | 
       <RouterLink to="/listapakolo">Lista pakoló</RouterLink> | 
+      <RouterLink to="/vslot">v-slot</RouterLink> | 
+
     </nav>
     
     <div class="my-border p-2">
