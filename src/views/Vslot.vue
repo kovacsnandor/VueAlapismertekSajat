@@ -1,6 +1,6 @@
 <template>
   <h2>v-slot, Halkártyák</h2>
-  <p>{{searchWord}}</p>
+  <p>{{ searchWord }}</p>
   <!-- Kártyák -->
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
     <HalKartya
@@ -14,19 +14,19 @@
         <img :src="hal.image" :alt="hal.title" />
       </template>
       <template v-slot:title>
-        <h5>{{ hal.title }}</h5>
+        <h5 v-html="keresJelol(hal.title)"></h5>
       </template>
     </HalKartya>
   </div>
 
   <!-- Hal info modal -->
-  <HalInfo
-    :title="kivalasztottHal.title"
-  >
-    <img :src="kivalasztottHal.image" :alt="kivalasztottHal.title"
+  <HalInfo :title="keresJelol(kivalasztottHal.title)">
+    <img
+      :src="kivalasztottHal.image"
+      :alt="kivalasztottHal.title"
       class="float-start col-12 col-sm-6 col-lg-4 me-1 p-2 my-picture"
-    >
-    <div v-html="textFormat"></div>
+    />
+    <div v-html="keresJelol(textFormat)"></div>
   </HalInfo>
 </template>
 
@@ -46,7 +46,7 @@ export default {
     HalKartya,
     HalInfo,
   },
-  inject: ['searchWord'],
+  inject: ["searchWord"],
   data() {
     return {
       kivalasztottHal: new Hal(),
@@ -113,23 +113,35 @@ export default {
   },
   methods: {
     reszletekModalKezelo(id) {
-      this.kivalasztottHal=this.halak.filter(h => h.id==id.id)[0];
-
-      console.log(id.id);
+      this.kivalasztottHal = this.halak.filter((h) => h.id == id.id)[0];
+    },
+    keresJelol(text) {
+      if (this.searchWord) {
+        let what = new RegExp(this.searchWord, "gi");
+        if (text) {
+          text = text.replace(what, (match) => {
+            return `<span class="mark p-0">${match}</span>`;
+          });
+        }
+        return text;
+      } else {
+        return text;
+      }
     },
   },
-  computed:{
-    textFormat(){
-      if (this.kivalasztottHal.text ==null) {
+  computed: {
+    textFormat() {
+      if (this.kivalasztottHal.text == null) {
         return `<p></p>`;
       }
-      return this.kivalasztottHal.text
-      .map(t=> `<p>${t}</p>`)
-      .join('');
-    }
-  }
+      return this.kivalasztottHal.text.map((t) => `<p>${t}</p>`).join("");
+    },
+  },
 };
 </script>
 
 <style>
+.mark {
+  background-color: orange;
+}
 </style>
