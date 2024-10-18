@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="person in persons" :key="person.id"
+        <tr v-for="person in personsTransform" :key="person.id"
           @click="onClickTr(person.id)"
           :class="{'table-success': selectedRowPersonId == person.id}"
         >
@@ -57,8 +57,8 @@
           <td>{{ person.dateOfBird }}</td>
           <td>{{ person.locality }}</td>
           <td>{{ person.zipCode }}</td>
-          <td>{{ person.neme }}</td>
-          <td>{{ person.professionId }}</td>
+          <td>{{ person.nemeString }}</td>
+          <td>{{ person.professionName }}</td>
         </tr>
       </tbody>
     </table>
@@ -83,11 +83,31 @@
 </template>
 
 <script>
+class Person {
+  constructor(
+    id = null,
+    name = null,
+    dateOfBird = null,
+    locality = null,
+    zipCode = null,
+    neme = null,
+    professionId = null
+  ) {
+    this.id = id;
+    this.name = name;
+    this.dateOfBird = dateOfBird;
+    this.locality = locality;
+    this.zipCode = zipCode;
+    this.neme = neme;
+    this.professionId = professionId;
+  }
+}
 import PersonForm from "@/components/PersonForm.vue";
 export default {
   components: { PersonForm },
   data() {
     return {
+      person: new Person(),
       selectedRowPersonId: null, 
       messageYesNo: null,
       state: "Read", //CRUD: Create, Read, Update, Delete
@@ -246,8 +266,26 @@ export default {
       console.log(id);
       
       this.selectedRowPersonId = id;
-    }
+    },
+    nemeString(neme){
+      return neme ? "férfi" : "nő";
+    },
+    professionById(professionId){
+      return this.professions.filter(p => p.id == professionId)[0].name;
+    },
   },
+  computed: {
+    personsTransform(){
+      return this.persons.map(p => {
+        const newP = {
+          ...p,
+          nemeString: this.nemeString(p.neme),
+          professionName: this.professionById(p.professionId)
+        }
+        return newP;
+      })
+    }
+  }
 };
 </script>
 
