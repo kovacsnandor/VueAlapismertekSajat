@@ -77,7 +77,11 @@
       </div>
 
       <!-- Form person -->
-      <PersonForm v-if="state == 'Create' || state == 'Update'" />
+      <PersonForm v-if="state == 'Create' || state == 'Update'" 
+        :personForm="person"
+        :professions="professions"
+        @savePerson="savePersonHandler"
+      />
     </Modal>
   </div>
 </template>
@@ -90,7 +94,7 @@ class Person {
     dateOfBird = null,
     locality = null,
     zipCode = null,
-    neme = null,
+    neme = true,
     professionId = null
   ) {
     this.id = id;
@@ -103,11 +107,19 @@ class Person {
   }
 }
 import PersonForm from "@/components/PersonForm.vue";
+import * as bootstrap from 'bootstrap'
+import uniqid from 'uniqid';
 export default {
   components: { PersonForm },
+  mounted() {
+    this.modal = new bootstrap.Modal("#modal", {
+      keyboard: false,
+    });
+  },
   data() {
     return {
-      person: new Person(),
+      modal: null,
+      person: new Person(uniqid()),
       selectedRowPersonId: null, 
       messageYesNo: null,
       state: "Read", //CRUD: Create, Read, Update, Delete
@@ -258,7 +270,13 @@ export default {
       
     },
     onClickCreate(){
+      this.title="Új személy létrehozása";
+      this.yes=null;
+      this.no="Mégsem";
+      this.size="lg";
+
       this.state="Create";
+      this.person = new Person(uniqid())
       console.log("Create");
       
     },
@@ -273,6 +291,12 @@ export default {
     professionById(professionId){
       return this.professions.filter(p => p.id == professionId)[0].name;
     },
+    savePersonHandler(person){
+      this.person = person
+      this.modal.hide();
+      console.log("save", this.person);
+      
+    }
   },
   computed: {
     personsTransform(){
