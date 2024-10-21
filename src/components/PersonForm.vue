@@ -20,7 +20,7 @@
         class="form-control"
         id="dateOfBird"
         required
-        v-model="personForm.dateOfBird"
+        v-model="formattedDate"
       />
     </div>
     <!-- locality -->
@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import dateFormat, { masks } from "dateformat";
 export default {
   props: ["personForm", "professions"],
   emits: ["savePerson"],
@@ -110,6 +111,21 @@ export default {
         
     }
   },
+  computed: {
+    formattedDate: {
+      get() {
+        if (!this.personForm.dateOfBird) {
+          return null;
+        }
+        return dateFormat(this.personForm.dateOfBird,'yyyy-mm-dd');
+
+        // return this.personForm.dateOfBird
+      },
+      set(newValue) {
+        this.personForm.dateOfBird = dateFormat(newValue,'yyyy.mm.dd');
+      }
+    }
+  }
 };
 </script>
 

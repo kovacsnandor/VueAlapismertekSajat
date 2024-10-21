@@ -108,11 +108,12 @@ class Person {
 }
 import PersonForm from "@/components/PersonForm.vue";
 import * as bootstrap from 'bootstrap'
+
 import uniqid from 'uniqid';
 export default {
   components: { PersonForm },
-  mounted() {
-    this.modal = new bootstrap.Modal("#modal", {
+  mounted() {     
+      this.modal = new bootstrap.Modal("#modal", {
       keyboard: false,
     });
   },
@@ -248,6 +249,15 @@ export default {
       this.persons = this.persons.filter(p => p.id != this.selectedRowPersonId);
     },
 
+    createPerson(){
+      this.persons.push(this.person);
+      this.state = "Read"
+    },
+    updatePerson(){
+      const index = this.persons.findIndex(p => p.id == this.person.id)
+      this.persons[index] = this.person;
+      this.state = "Read"
+    },
     yesEventHandler() {
       console.log("yes event");
       if (this.state == 'Delete') {
@@ -266,7 +276,13 @@ export default {
     },
     onClickUpdate(person){
       this.state="Update";
-      console.log(person);
+      this.title="Személy módosítása";
+      this.yes=null;
+      this.no="Mégsem";
+      this.size="lg";
+      // this.person = person;
+      this.person = {...person};
+      
       
     },
     onClickCreate(){
@@ -294,6 +310,11 @@ export default {
     savePersonHandler(person){
       this.person = person
       this.modal.hide();
+      if (this.state == "Create") {
+        this.createPerson()
+      } else if (this.state == "Update"){
+        this.updatePerson()
+      }
       console.log("save", this.person);
       
     }
