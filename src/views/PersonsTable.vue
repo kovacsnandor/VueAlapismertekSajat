@@ -201,22 +201,32 @@ export default {
         {
           id: 1,
           name: "Asztalos",
+          salary: 560000,
+          workingTime: 'kötött'
         },
         {
           id: 2,
           name: "Villanyszerelő",
+          salary: 560000,
+          workingTime: 'kötött'
         },
         {
           id: 3,
           name: "Programozó",
+          salary: 560000,
+          workingTime: 'kötött'
         },
         {
           id: 4,
           name: "Könyvelő",
+          salary: 560000,
+          workingTime: 'kötetlen'
         },
         {
           id: 5,
           name: "Kereskedő",
+          salary: 560000,
+          workingTime: 'köteltlen'
         },
       ],
     };
