@@ -10,9 +10,9 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/crud',
-      name: 'crud',
-      component: () => import('../views/Crud.vue')
+      path: '/personstable',
+      name: 'personstable',
+      component: () => import('../views/PersonsTable.vue')
     }
   ]
 })
