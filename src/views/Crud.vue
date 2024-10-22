@@ -1,9 +1,7 @@
 <template>
   <div>
     <h2>CRUD műveletek</h2>
-
     <!-- Táblázat -->
-
     <table class="table table-striped">
       <thead>
         <tr>
@@ -17,41 +15,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="person in personsTransform" :key="person.id"
+        <tr
+          v-for="person in personsTransform"
+          :key="person.id"
           @click="onClickTr(person.id)"
-          :class="{'table-success': selectedRowPersonId == person.id}"
+          :class="{ 'table-success': selectedRowPersonId == person.id }"
         >
           <td class="text-nowrap">
-            <!-- törlés -->
-            <button
-              type="button"
-              class="btn btn-outline-danger btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#modal"
-              @click="onClickDeleteButton(person)"
-            >
-              <i class="bi bi-trash3"></i>
-            </button>
-            <!-- módosítás -->
-            <button
-              type="button"
-              class="btn btn-outline-primary btn-sm ms-2"
-              data-bs-toggle="modal"
-              data-bs-target="#modal"
-              @click="onClickUpdate(person)"
-            >
-              <i class="bi bi-pencil"></i>
-            </button>
-            <!-- új -->
-            <button
-              type="button"
-              class="btn btn-outline-success btn-sm ms-2"
-              data-bs-toggle="modal"
-              data-bs-target="#modal"
-              @click="onClickCreate()"
-            >
-              <i class="bi bi-plus-lg"></i>
-            </button>
+            <OpewrationsCrud
+              :person="person"
+              @onClickDeleteButton="onClickDeleteButton"
+              @onClickUpdate="onClickUpdate"
+              @onClickCreate="onClickCreate"
+            />
           </td>
           <td>{{ person.name }}</td>
           <td>{{ person.dateOfBird }}</td>
@@ -62,7 +38,6 @@
         </tr>
       </tbody>
     </table>
-
     <!-- Modal -->
     <Modal
       :title="title"
@@ -77,7 +52,8 @@
       </div>
 
       <!-- Form person -->
-      <PersonForm v-if="state == 'Create' || state == 'Update'" 
+      <PersonForm
+        v-if="state == 'Create' || state == 'Update'"
         :personForm="person"
         :professions="professions"
         @savePerson="savePersonHandler"
@@ -107,13 +83,14 @@ class Person {
   }
 }
 import PersonForm from "@/components/PersonForm.vue";
-import * as bootstrap from 'bootstrap'
+import OpewrationsCrud from "@/components/OpewrationsCrud.vue";
+import * as bootstrap from "bootstrap";
 
-import uniqid from 'uniqid';
+import uniqid from "uniqid";
 export default {
-  components: { PersonForm },
-  mounted() {     
-      this.modal = new bootstrap.Modal("#modal", {
+  components: { PersonForm, OpewrationsCrud },
+  mounted() {
+    this.modal = new bootstrap.Modal("#modal", {
       keyboard: false,
     });
   },
@@ -121,7 +98,7 @@ export default {
     return {
       modal: null,
       person: new Person(uniqid()),
-      selectedRowPersonId: null, 
+      selectedRowPersonId: null,
       messageYesNo: null,
       state: "Read", //CRUD: Create, Read, Update, Delete
       title: null,
@@ -245,92 +222,89 @@ export default {
     };
   },
   methods: {
-    deletePersonById(){
-      this.persons = this.persons.filter(p => p.id != this.selectedRowPersonId);
+    deletePersonById() {
+      this.persons = this.persons.filter(
+        (p) => p.id != this.selectedRowPersonId
+      );
     },
 
-    createPerson(){
+    createPerson() {
       this.persons.push(this.person);
-      this.state = "Read"
+      this.state = "Read";
     },
-    updatePerson(){
-      const index = this.persons.findIndex(p => p.id == this.person.id)
+    updatePerson() {
+      const index = this.persons.findIndex((p) => p.id == this.person.id);
       this.persons[index] = this.person;
-      this.state = "Read"
+      this.state = "Read";
     },
     yesEventHandler() {
       console.log("yes event");
-      if (this.state == 'Delete') {
-        this.deletePersonById()
+      if (this.state == "Delete") {
+        this.deletePersonById();
       }
     },
-    onClickDeleteButton(person){
-      this.title="Törlés";
+    onClickDeleteButton(person) {
+      this.title = "Törlés";
       this.messageYesNo = `Valóban törölniakarod? Név: ${person.name}`;
-      this.yes="Igen";
-      this.no="Nem";
-      this.size=null;
-      this.state="Delete";
+      this.yes = "Igen";
+      this.no = "Nem";
+      this.size = null;
+      this.state = "Delete";
       console.log(person);
-      
     },
-    onClickUpdate(person){
-      this.state="Update";
-      this.title="Személy módosítása";
-      this.yes=null;
-      this.no="Mégsem";
-      this.size="lg";
+    onClickUpdate(person) {
+      this.state = "Update";
+      this.title = "Személy módosítása";
+      this.yes = null;
+      this.no = "Mégsem";
+      this.size = "lg";
       // this.person = person;
-      this.person = {...person};
-      
-      
+      this.person = { ...person };
     },
-    onClickCreate(){
-      this.title="Új személy létrehozása";
-      this.yes=null;
-      this.no="Mégsem";
-      this.size="lg";
+    onClickCreate() {
+      this.title = "Új személy létrehozása";
+      this.yes = null;
+      this.no = "Mégsem";
+      this.size = "lg";
 
-      this.state="Create";
-      this.person = new Person(uniqid())
+      this.state = "Create";
+      this.person = new Person(uniqid());
       console.log("Create");
-      
     },
-    onClickTr(id){
+    onClickTr(id) {
       console.log(id);
-      
+
       this.selectedRowPersonId = id;
     },
-    nemeString(neme){
+    nemeString(neme) {
       return neme ? "férfi" : "nő";
     },
-    professionById(professionId){
-      return this.professions.filter(p => p.id == professionId)[0].name;
+    professionById(professionId) {
+      return this.professions.filter((p) => p.id == professionId)[0].name;
     },
-    savePersonHandler(person){
-      this.person = person
+    savePersonHandler(person) {
+      this.person = person;
       this.modal.hide();
       if (this.state == "Create") {
-        this.createPerson()
-      } else if (this.state == "Update"){
-        this.updatePerson()
+        this.createPerson();
+      } else if (this.state == "Update") {
+        this.updatePerson();
       }
       console.log("save", this.person);
-      
-    }
+    },
   },
   computed: {
-    personsTransform(){
-      return this.persons.map(p => {
+    personsTransform() {
+      return this.persons.map((p) => {
         const newP = {
           ...p,
           nemeString: this.nemeString(p.neme),
-          professionName: this.professionById(p.professionId)
-        }
+          professionName: this.professionById(p.professionId),
+        };
         return newP;
-      })
-    }
-  }
+      });
+    },
+  },
 };
 </script>
 
