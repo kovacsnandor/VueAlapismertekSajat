@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/personstable',
       name: 'personstable',
       component: () => import('../views/PersonsTable.vue')
+    },
+    {
+      path: '/professionstable',
+      name: 'professionstable',
+      component: () => import('../views/ProfessionsTable.vue')
     }
   ]
 })

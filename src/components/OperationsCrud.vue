@@ -5,7 +5,7 @@
     class="btn btn-outline-danger btn-sm"
     data-bs-toggle="modal"
     data-bs-target="#modal"
-    @click="onClickDeleteButton(person)"
+    @click="onClickDeleteButton(dataLine)"
   >
     <i class="bi bi-trash3"></i>
   </button>
@@ -15,7 +15,7 @@
     class="btn btn-outline-primary btn-sm ms-2"
     data-bs-toggle="modal"
     data-bs-target="#modal"
-    @click="onClickUpdate(person)"
+    @click="onClickUpdate(dataLine)"
   >
     <i class="bi bi-pencil"></i>
   </button>
@@ -33,14 +33,14 @@
 
 <script>
 export default {
-  props: ["person"],
+  props: ["dataLine"],
   emits: ["onClickDeleteButton", "onClickUpdate", "onClickCreate"],
   methods: {
-    onClickDeleteButton(person) {
-      this.$emit("onClickDeleteButton", person);
+    onClickDeleteButton(dataLine) {
+      this.$emit("onClickDeleteButton", dataLine);
     },
-    onClickUpdate(person) {
-      this.$emit("onClickUpdate", person);
+    onClickUpdate(dataLine) {
+      this.$emit("onClickUpdate", dataLine);
     },
     onClickCreate() {
       this.$emit("onClickCreate");

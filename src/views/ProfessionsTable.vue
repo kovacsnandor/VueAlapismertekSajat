@@ -1,40 +1,37 @@
 <template>
   <div>
-    <h2>Személyek</h2>
+    <h2>Foglalkozások</h2>
     <!-- Táblázat -->
+ 
     <table class="table table-striped">
       <thead>
         <tr>
+          <!-- rename -->
           <th scope="col">Műveletek</th>
-          <th scope="col">Név</th>
-          <th scope="col">Született</th>
-          <th scope="col">Helység</th>
-          <th scope="col">Irányítószám</th>
-          <th scope="col">Neme</th>
           <th scope="col">Foglalkozás</th>
+          <th scope="col">Fizetés</th>
+          <th scope="col">Munkaidő</th>
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="person in personsTransform"
-          :key="person.id"
-          @click="onClickTr(person.id)"
-          :class="{ 'table-success': selectedRowPersonId == person.id }"
+          v-for="dataLine in collection"
+          :key="dataLine.id"
+          @click="onClickTr(dataLine.id)"
+          :class="{ 'table-success': selectedRowDataLineId == dataLine.id }"
         >
           <td class="text-nowrap">
-            <OpewrationsCrud
-              :data="person"
+            <OperationsCrud
+              :dataLine="dataLine"
               @onClickDeleteButton="onClickDeleteButton"
               @onClickUpdate="onClickUpdate"
               @onClickCreate="onClickCreate"
             />
           </td>
-          <td>{{ person.name }}</td>
-          <td>{{ person.dateOfBird }}</td>
-          <td>{{ person.locality }}</td>
-          <td>{{ person.zipCode }}</td>
-          <td>{{ person.nemeString }}</td>
-          <td>{{ person.professionName }}</td>
+          <!-- rename -->
+          <td>{{ dataLine.name }}</td>
+          <td>{{ dataLine.salary }}</td>
+          <td>{{ dataLine.workingTime }}</td>
         </tr>
       </tbody>
     </table>
@@ -52,43 +49,37 @@
       </div>
 
       <!-- Form person -->
-      <PersonForm
+      <ProfessionForm
         v-if="state == 'Create' || state == 'Update'"
-        :personForm="person"
-        :professions="professions"
-        @savePerson="savePersonHandler"
+        :dataLine="dataLine"
+        @saveDataLine="saveDataLineHandler"
       />
     </Modal>
   </div>
 </template>
 
 <script>
-class Person {
+// rename
+class DataLine {
   constructor(
     id = null,
     name = null,
-    dateOfBird = null,
-    locality = null,
-    zipCode = null,
-    neme = true,
-    professionId = null
+    salary = null,
+    workingTime = 'kötött',
   ) {
     this.id = id;
     this.name = name;
-    this.dateOfBird = dateOfBird;
-    this.locality = locality;
-    this.zipCode = zipCode;
-    this.neme = neme;
-    this.professionId = professionId;
+    this.salary = salary;
+    this.workingTime = workingTime;
   }
 }
-import PersonForm from "@/components/PersonForm.vue";
-import OpewrationsCrud from "@/components/OperationsCrud.vue";
+import ProfessionForm from "@/components/ProfessionForm.vue";
+import OperationsCrud from "@/components/OperationsCrud.vue";
 import * as bootstrap from "bootstrap";
 
 import uniqid from "uniqid";
 export default {
-  components: { PersonForm, OpewrationsCrud },
+  components: { ProfessionForm, OperationsCrud },
   mounted() {
     this.modal = new bootstrap.Modal("#modal", {
       keyboard: false,
@@ -97,8 +88,8 @@ export default {
   data() {
     return {
       modal: null,
-      person: new Person(uniqid()),
-      selectedRowPersonId: null,
+      dataLine: new DataLine(uniqid()),
+      selectedRowDataLineId: null,
       messageYesNo: null,
       state: "Read", //CRUD: Create, Read, Update, Delete
       title: null,
@@ -232,88 +223,79 @@ export default {
     };
   },
   methods: {
-    deletePersonById() {
-      this.persons = this.persons.filter(
-        (p) => p.id != this.selectedRowPersonId
+    //rename
+    deleteDataLineById() {
+      this.collection = this.collection.filter(
+        (p) => p.id != this.selectedRowDataLineId
       );
     },
-
-    createPerson() {
-      this.persons.push(this.person);
+    //rename
+    createDataLine() {
+      this.collection.push(this.dataLine);
       this.state = "Read";
     },
-    updatePerson() {
-      const index = this.persons.findIndex((p) => p.id == this.person.id);
-      this.persons[index] = this.person;
+    //reaname
+    updateDataLine() {
+      const index = this.collection.findIndex((p) => p.id == this.dataLine.id);
+      this.collection[index] = this.dataLine;
       this.state = "Read";
     },
     yesEventHandler() {
       console.log("yes event");
       if (this.state == "Delete") {
-        this.deletePersonById();
+        this.deleteDataLineById();
       }
     },
-    onClickDeleteButton(person) {
+    onClickDeleteButton(dataLine) {
       this.title = "Törlés";
-      this.messageYesNo = `Valóban törölniakarod? Név: ${person.name}`;
+      this.messageYesNo = `Valóban törölniakarod? Név: ${dataLine.name}`;
       this.yes = "Igen";
       this.no = "Nem";
       this.size = null;
       this.state = "Delete";
-      console.log(person);
+      console.log(dataLine);
     },
-    onClickUpdate(person) {
+    onClickUpdate(dataLine) {
       this.state = "Update";
-      this.title = "Személy módosítása";
+      this.title = "Foglalkozás módosítása";
       this.yes = null;
       this.no = "Mégsem";
       this.size = "lg";
       // this.person = person;
-      this.person = { ...person };
+      this.dataLine = { ...dataLine };
     },
     onClickCreate() {
-      this.title = "Új személy létrehozása";
+      this.title = "Új Foglalkozás létrehozása";
       this.yes = null;
       this.no = "Mégsem";
       this.size = "lg";
 
       this.state = "Create";
-      this.person = new Person(uniqid());
+      this.dataLine = new DataLine(uniqid());
       console.log("Create");
     },
     onClickTr(id) {
       console.log(id);
 
-      this.selectedRowPersonId = id;
+      this.selectedRowdataLineId = id;
     },
-    nemeString(neme) {
-      return neme ? "férfi" : "nő";
-    },
-    professionById(professionId) {
-      return this.professions.filter((p) => p.id == professionId)[0].name;
-    },
-    savePersonHandler(person) {
-      this.person = person;
+    
+    saveDataLineHandler(dataLine) {
+      this.dataLine = dataLine;
       this.modal.hide();
       if (this.state == "Create") {
-        this.createPerson();
+        this.createDataLine();
       } else if (this.state == "Update") {
-        this.updatePerson();
+        this.updateDataLine();
       }
-      console.log("save", this.person);
+      console.log("save", this.dataLine);
     },
   },
   computed: {
-    personsTransform() {
-      return this.persons.map((p) => {
-        const newP = {
-          ...p,
-          nemeString: this.nemeString(p.neme),
-          professionName: this.professionById(p.professionId),
-        };
-        return newP;
-      });
-    },
+    collection(){
+      //rename
+      return this.professions
+    }
   },
 };
 </script>
