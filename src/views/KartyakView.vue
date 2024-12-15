@@ -2,7 +2,6 @@
   <div>
     <div class="d-flex justify-content-between">
       <h2>Kártyák</h2>
-
       <!-- Hány kártya/oldal -->
       <div class="d-flex align-items-center">
         <span>kártya/olal: </span>
@@ -12,8 +11,7 @@
           v-model="rowsPerPage"
         >
           <option
-            v-for="number in rowsPerPageArray"
-            :key="number"
+            v-for="number in rowsPerPageArray" :key="number"
             :value="number"
           >
             {{ number }}
@@ -69,13 +67,14 @@ export default {
     this.getPageCount();
   },
   watch: {
-    pageNumber() {
-      this.getOsztalynevsor();
-    },
     async rowsPerPage() {
       await this.getOsztalynevsor();
       await this.getPageCount();
-      this.pageNumber = Math.min(this.pageNumber, this.numberOfPages)
+      this.pageNumber = Math.min(
+        this.pageNumber, this.numberOfPages);
+    },
+    pageNumber() {
+      this.getOsztalynevsor();
     },
   },
   methods: {
@@ -93,8 +92,8 @@ export default {
         this.pagesArray.push(i + 1);
       }
     },
-    pagingHandler(page) {
-      this.pageNumber = page.pageNumber;
+    pagingHandler(pageInfo) {
+      this.pageNumber = pageInfo.pageNumber;
     },
   },
 };
