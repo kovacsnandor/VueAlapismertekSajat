@@ -44,7 +44,7 @@
 <script>
 import Paginator from "@/components/Paginator.vue";
 import Cards from "../components/Cards.vue";
-import "../components/Cards.vue";
+import { BASE_URL } from '../helpers/baseUrls'
 import axios from "axios";
 export default {
   components: {
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      urlApi: "http://localhost:8000/api",
+      urlApi: BASE_URL,
       cards: [], //A kártyák
       pagesArray: [], //hány oldal van tömb
       pageNumber: 1, //melyik oldal van kiválasztva
