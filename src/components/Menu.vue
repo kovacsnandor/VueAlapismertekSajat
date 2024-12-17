@@ -24,7 +24,9 @@
             </li>
             <!-- Counter -->
             <li class="nav-item">
-              <a class="nav-link" href="#">Counter</a>
+              <a class="nav-link" href="#"
+                >Counter ({{ storeCounter.paddedCount }})</a
+              >
             </li>
             <!-- Iskola -->
             <li class="nav-item dropdown">
@@ -39,17 +41,21 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <router-link class="dropdown-item" to="/kartyak"
+                  <router-link class="dropdown-item" to="/kartyak/1/3"
                     >Kártyák</router-link
                   >
                 </li>
                 <li><a class="dropdown-item" href="#">Tanuló keres</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li v-if="store.user">
-                  <router-link class="dropdown-item" to="/sportok">Sportok</router-link>
+                  <router-link class="dropdown-item" to="/sportok"
+                    >Sportok</router-link
+                  >
                 </li>
                 <li v-if="store.user">
-                  <router-link class="dropdown-item" to="/osztalyok">Osztályok</router-link>
+                  <router-link class="dropdown-item" to="/osztalyok"
+                    >Osztályok</router-link
+                  >
                 </li>
               </ul>
             </li>
@@ -79,7 +85,11 @@
                   <a class="dropdown-item" href="#"> Logout </a>
                 </li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><router-link class="dropdown-item" to="/regisztracio">Regisztráció</router-link></li>
+                <li>
+                  <router-link class="dropdown-item" to="/regisztracio"
+                    >Regisztráció</router-link
+                  >
+                </li>
                 <li v-if="store.user">
                   <a class="dropdown-item" href="#">Profile</a>
                 </li>
@@ -92,6 +102,7 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
+              v-model="storeSearchWord.searchWord"
             />
             <button class="btn btn-outline-success" type="submit">
               Search
@@ -105,6 +116,8 @@
 
 <script>
 import { useAuthStore } from "../stores/useAuthStore";
+import { useCounterStore } from "@/stores/counter";
+import { useSearchWordStore } from "@/stores/useSearchWordStore";
 import { BASE_URL } from "../helpers/baseUrls";
 import router from "../router";
 import axios from "axios";
@@ -112,6 +125,8 @@ export default {
   data() {
     return {
       store: useAuthStore(),
+      storeCounter: useCounterStore(),
+      storeSearchWord: useSearchWordStore(),
     };
   },
   methods: {
@@ -127,7 +142,7 @@ export default {
         console.log(error);
       }
       this.store.clearStoredData();
-      router.push('/');
+      router.push("/");
     },
   },
 };

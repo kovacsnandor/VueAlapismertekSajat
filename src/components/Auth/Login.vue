@@ -23,7 +23,20 @@
                 />
               </div>
               <div class="form-group mb-3">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <div class="d-flex align-items-center">
+                  <button type="submit" class="btn btn-primary me-4">
+                    Login
+                  </button>
+
+                  <div
+                    class="spinner-border m-0 p-0"
+                    role="status"
+                    v-if="errorMessage == '...'"
+                  >
+                    <span class="visually-hidden m-0">Loading...</span>
+                  </div>
+                  <span v-if="errorMessage != '...'">{{ errorMessage }}</span>
+                </div>
               </div>
             </form>
           </div>
@@ -37,7 +50,6 @@
 import { useAuthStore } from "../../stores/useAuthStore.js";
 import axios from "axios";
 import { BASE_URL } from "../../helpers/baseUrls";
-import { useToast } from "vue-toastification";
 import router from "../../router";
 export default {
   data() {
@@ -47,12 +59,13 @@ export default {
         password: "123",
       },
       store: useAuthStore(),
-      toast: useToast(),
+      errorMessage: null,
     };
   },
   methods: {
     async userAuth() {
       try {
+        this.errorMessage = "...";
         const url = `${BASE_URL}/users/login`;
         const headers = {
           Accept: "application/json",
@@ -63,9 +76,13 @@ export default {
         this.store.setToken(response.data.data.token);
         // console.log(this.store.token);
         console.log("sikeres bejelentkezés");
+        this.errorMessage = null;
+
         router.push("/");
       } catch (error) {
         console.log(error);
+        this.errorMessage = "Sikertelen bejelentkezés";
+        this.store.clearStoredData();
       }
     },
   },
