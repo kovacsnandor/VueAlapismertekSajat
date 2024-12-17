@@ -3,10 +3,9 @@
     <div class="d-flex justify-content-between align-items-center">
       <h2>Kártyák</h2>
       <p class="m-0">
-        $route 
-          .path:{{ $route.path }} | 
-          .name:{{ $route.name }} | 
-          .params:{{ $route.params }}
+        $route .path:{{ $route.path }} | .name:{{ $route.name }} | .params:{{
+          $route.params
+        }}
       </p>
       <!-- Hány kártya/oldal -->
       <div class="d-flex align-items-center">
@@ -69,20 +68,36 @@ export default {
       rowsPerPageArray: [3, 5, 10, 25, 100], //kártya/oldal választék
     };
   },
-  mounted() {
-    this.getOsztalynevsor();
-    this.getPageCount();
+  async mounted() {
+    this.cardPerPageCorrection();
+    console.log(1);
+
+    await this.getOsztalynevsor();
+    console.log(2);
+    await this.getPageCount();
+    console.log(3);
   },
   watch: {
-    async cardsPerPage(data) {
-      await this.getOsztalynevsor();
-      await this.getPageCount();
+
+    $route: 'routeChanged',
+    async cardsPerPage(old, cur) {
+      if (old != cur) {
+        await this.getOsztalynevsor();
+        await this.getPageCount();
+        console.log(4);
+      }
+      console.log(5);
       this.pageNumber = Math.min(this.pageNumber, this.numberOfPages);
-      this.routerReplacer()
+      this.routerReplacer();
     },
-    pageNumber() {
+    pageNumber(old, cur) {
+      if (old == cur) {
+        return
+      }
+      console.log(6);
+      
       this.getOsztalynevsor();
-      this.routerReplacer()
+      this.routerReplacer();
     },
   },
   methods: {
@@ -103,7 +118,7 @@ export default {
     pagingHandler(pageInfo) {
       this.pageNumber = pageInfo.pageNumber;
     },
-    routerReplacer(){
+    routerReplacer() {
       const routeName = this.$route.name;
       this.$router.push({
         name: routeName,
@@ -112,6 +127,22 @@ export default {
           cardsPerPage: this.cardsPerPage,
         },
       });
+    },
+    cardPerPageCorrection() {
+      if (!this.rowsPerPageArray.includes(Number(this.cardsPerPage))) {
+        this.cardsPerPage = this.rowsPerPageArray
+          .filter((x) => x < this.cardsPerPage)
+          .sort((a, b) => b - a)[0];
+      }
+    },
+    routeChanged(){
+      console.log("route változás");
+      if (this.pageNumber != this.$route.params.pageNumber) {
+        this.pageNumber= this.$route.params.pageNumber; //melyik oldal van kiválasztva
+      }
+      if (this.cardsPerPage != this.$route.params.cardsPerPage) {
+        this.cardsPerPage= this.$route.params.cardsPerPage;
+      }
     }
   },
 };
