@@ -14,7 +14,7 @@ function checkIfNotLogged() {
 
 const routeTitle = "Iskola";
 
-      //meta: {title: `${routeTitle} - ${router.name}/${router.params.pageNumber}/${router.params.cardsPerPage}`},
+//meta: {title: (route) => `${route.name}/${route.params.pageNumber}/${route.params.cardsPerPage}`},
 
 
 const router = createRouter({
@@ -24,39 +24,40 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
-      meta: {title: `${routeTitle}`},
+      meta: {title: (route) => `home`},
     },
     {
       path: "/kartyak/:pageNumber/:cardsPerPage",
       name: "kartyak",
       component: () => import("../views/KartyakView.vue"),
-      meta: {title: `${routeTitle} - `},
+      meta: {title: (route) => `${route.name}/${route.params.pageNumber}/${route.params.cardsPerPage}`},
+ 
     },
     {
       path: "/login",
       name: "login",
       component: () => import("../components/Auth/Login.vue"),
-      meta: {title: `${routeTitle} - `},
+      meta: {title: (route) => `login`},
     },
     {
       path: "/regisztracio",
       name: "regisztracio",
       component: () => import("../components/Auth/Registration.vue"),
-      meta: {title: `${routeTitle} `},
+      meta: {title: (route) => `regisztráció`},
     },
     {
       path: "/sportok",
       name: "sportok",
       component: () => import("../views/SportokView.vue"),
       beforeEnter: [checkIfNotLogged],
-      meta: {title: `${routeTitle} `},
+      meta: {title: (route) => `sportok`},
     },
     {
       path: "/osztalyok",
       name: "osztalyok",
       component: () => import("../views/OsztalyokView.vue"),
       beforeEnter: [checkIfNotLogged],
-      meta: {title: `${routeTitle} `},
+      meta: {title: (route) => `osztályok`},
     },
     { path: "/:pathMatch(.*)*", 
       name: "NotFound", 
@@ -64,9 +65,11 @@ const router = createRouter({
   ],
 });
 
-function beforeRouteEnter(to, from, next) {
-  document.title = to.meta.title || 'Alapértelmezett cím';
+router.beforeEach((to, from, next) => {
+  // document.title=  to.meta.title ? `Iskola - ${to.meta.title}` : 'Iskola';
+  // document.title =`Iskola - ${to.meta.title(to)}`;
+  document.title =`Iskola - ` + to.meta.title(to);
   next();
-}
+})
 
 export default router;
