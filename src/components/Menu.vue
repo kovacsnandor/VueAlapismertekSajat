@@ -69,16 +69,12 @@
                 aria-expanded="false"
               >
                 <!-- Login -->
-                <span v-if="!store.user"> Login </span>
-                <!-- User -->
-                <span v-if="store.user">
-                  <i class="bi bi-person"></i> {{ store.user }}
-                </span>
+                <i class="bi bi-person"></i> <span v-if="store.user">{{ store.user }}</span>
               </a>
               <ul class="dropdown-menu">
                 <li>
                   <router-link class="dropdown-item" to="/login">
-                    <i class="bi bi-person"></i> Login
+                    Login
                   </router-link>
                 </li>
                 <li v-if="store.user" @click.prevent="logout()">
