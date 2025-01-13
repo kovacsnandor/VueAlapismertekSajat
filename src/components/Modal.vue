@@ -42,7 +42,6 @@
             class="btn btn-primary"
             v-if="yes"
             @click="onClickYesButton()"
-            data-bs-dismiss="modal"
           >
             {{ yes }}
           </button>

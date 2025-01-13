@@ -2,7 +2,7 @@
   <div>
     <h2>Foglalkozások</h2>
     <!-- Táblázat -->
- 
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -18,7 +18,7 @@
           v-for="dataLine in collection"
           :key="dataLine.id"
           @click="onClickTr(dataLine.id)"
-          :class="{ 'table-success': selectedRowDataLineId == dataLine.id }"
+          :class="{'table-success': selectedRowDataLineId == dataLine.id}"
         >
           <td class="text-nowrap">
             <OperationsCrud
@@ -61,12 +61,7 @@
 <script>
 // rename
 class DataLine {
-  constructor(
-    id = null,
-    name = null,
-    salary = null,
-    workingTime = 'kötött',
-  ) {
+  constructor(id = null, name = null, salary = null, workingTime = "kötött") {
     this.id = id;
     this.name = name;
     this.salary = salary;
@@ -77,7 +72,7 @@ import ProfessionForm from "@/components/ProfessionForm.vue";
 import OperationsCrud from "@/components/OperationsCrud.vue";
 import * as bootstrap from "bootstrap";
 
-import uniqid from "uniqid";
+// import uniqid from "uniqid";
 export default {
   components: { ProfessionForm, OperationsCrud },
   mounted() {
@@ -88,7 +83,7 @@ export default {
   data() {
     return {
       modal: null,
-      dataLine: new DataLine(uniqid()),
+      dataLine: new DataLine(this.uniqid()),
       selectedRowDataLineId: null,
       messageYesNo: null,
       state: "Read", //CRUD: Create, Read, Update, Delete
@@ -193,38 +188,46 @@ export default {
           id: 1,
           name: "Asztalos",
           salary: 560000,
-          workingTime: 'kötött'
+          workingTime: "kötött",
         },
         {
           id: 2,
           name: "Villanyszerelő",
           salary: 560000,
-          workingTime: 'kötött'
+          workingTime: "kötött",
         },
         {
           id: 3,
           name: "Programozó",
           salary: 560000,
-          workingTime: 'kötött'
+          workingTime: "kötött",
         },
         {
           id: 4,
           name: "Könyvelő",
           salary: 560000,
-          workingTime: 'kötetlen'
+          workingTime: "kötetlen",
         },
         {
           id: 5,
           name: "Kereskedő",
           salary: 560000,
-          workingTime: 'köteltlen'
+          workingTime: "köteltlen",
         },
       ],
+      collection: [],
     };
+  },
+  mounted() {
+    this.collection = this.professions;
+    this.modal = new bootstrap.Modal("#modal", {
+      keyboard: false,
+    });
   },
   methods: {
     //rename
     deleteDataLineById() {
+
       this.collection = this.collection.filter(
         (p) => p.id != this.selectedRowDataLineId
       );
@@ -241,9 +244,9 @@ export default {
       this.state = "Read";
     },
     yesEventHandler() {
-      console.log("yes event");
       if (this.state == "Delete") {
         this.deleteDataLineById();
+        this.modal.hide();
       }
     },
     onClickDeleteButton(dataLine) {
@@ -253,7 +256,6 @@ export default {
       this.no = "Nem";
       this.size = null;
       this.state = "Delete";
-      console.log(dataLine);
     },
     onClickUpdate(dataLine) {
       this.state = "Update";
@@ -271,15 +273,12 @@ export default {
       this.size = "lg";
 
       this.state = "Create";
-      this.dataLine = new DataLine(uniqid());
-      console.log("Create");
+      this.dataLine = new DataLine(this.uniqid());
     },
     onClickTr(id) {
-      console.log(id);
-
-      this.selectedRowdataLineId = id;
+      this.selectedRowDataLineId = id;
     },
-    
+
     saveDataLineHandler(dataLine) {
       this.dataLine = dataLine;
       this.modal.hide();
@@ -288,14 +287,24 @@ export default {
       } else if (this.state == "Update") {
         this.updateDataLine();
       }
-      console.log("save", this.dataLine);
+    },
+
+    uniqid(length = 10) {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+      }
+      return result;
     },
   },
   computed: {
-    collection(){
-      //rename
-      return this.professions
-    }
+    // collection(){
+    //   //rename
+    //   return this.professions
+    // }
   },
 };
 </script>

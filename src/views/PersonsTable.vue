@@ -86,7 +86,6 @@ import PersonForm from "@/components/PersonForm.vue";
 import OpewrationsCrud from "@/components/OperationsCrud.vue";
 import * as bootstrap from "bootstrap";
 
-import uniqid from "uniqid";
 export default {
   components: { PersonForm, OpewrationsCrud },
   mounted() {
@@ -97,7 +96,7 @@ export default {
   data() {
     return {
       modal: null,
-      person: new Person(uniqid()),
+      person: new Person(this.uniqid()),
       selectedRowPersonId: null,
       messageYesNo: null,
       state: "Read", //CRUD: Create, Read, Update, Delete
@@ -278,7 +277,7 @@ export default {
       this.size = "lg";
 
       this.state = "Create";
-      this.person = new Person(uniqid());
+      this.person = new Person(this.uniqid());
       console.log("Create");
     },
     onClickTr(id) {
@@ -302,6 +301,18 @@ export default {
       }
       console.log("save", this.person);
     },
+
+    uniqid(length = 10) {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let result = "";
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+      }
+      return result;
+    },
+
   },
   computed: {
     personsTransform() {
