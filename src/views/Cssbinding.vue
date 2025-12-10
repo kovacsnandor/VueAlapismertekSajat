@@ -6,7 +6,7 @@
         :min="min" :max="max" :step="step"
         v-model="opacity"
     />
-    <div :style="{backgroundColor: 'rgba(115,20,20,' + opacity + ')'}">
+    <div :style="{backgroundColor: 'rgba(115,20,20,' + opacity + ')', fontWeight: 'bold'} ">
         szövegközi stílus
     </div>
 
