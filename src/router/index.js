@@ -18,14 +18,21 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
       meta: {title: (route) => 'About'}
-    }
+    },
+    { path: "/:pathMatch(.*)*", 
+      name: "NotFound", 
+      component: () => import('@/views/404View.vue'),
+      meta:{
+        title: (route) => '404'
+      }
+    },
   ]
 })
 
 router.beforeEach((to, from, next) => {
   // document.title=  to.meta.title ? `Iskola - ${to.meta.title}` : 'Iskola';
   // document.title =`Iskola - ${to.meta.title(to)}`;
-  document.title =`Iskola - ` + to.meta.title(to);
+  document.title =`Valami - ` + to.meta.title(to);
   next();
 })
 
