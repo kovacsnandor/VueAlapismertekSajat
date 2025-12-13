@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "clean": "rd /s /q dist",
     "dev": "vite",
-    "build": "npm run clean && vite build",
+    "build": "vite build",
+    "buildgithub": "vite build --mode github",
     "preview": "vite preview"
   },
   "dependencies": {
