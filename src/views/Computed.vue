@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Computed</h2>
+    <p>Téglák: {{ teglak }}</p>
     <button type="button" class="btn btn-primary"
         @click="onClickPluszEgyTegla()"
     >

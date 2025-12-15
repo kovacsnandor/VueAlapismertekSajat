@@ -1,15 +1,18 @@
 <template>
   <div>
     <h2>Data Bind</h2>
-    <p>
-      {{ szoveg }} | 
-      {{ listaKivalasztottElem }} | 
-      {{ listaKivalasztottElemek }} | 
-      {{ kenyer }}, 
-      {{ kifli }} |
-      {{ neme }} |
-      {{ range }} |
-    </p>
+    <h5>Szövegdoboz:</h5>
+    {{ szoveg }}
+    <h5>Lista:</h5>
+    {{ listaKivalasztottElem }}
+    <h5>Multi lista:</h5>
+    {{ listaKivalasztottElemek }}
+    <h5>Check boxok:</h5>
+    {{ kenyer }}, {{ kifli }}
+    <h5>Neme:</h5>
+    {{ neme }}
+    <h5>Range:</h5>
+    {{ range }}
 
     <!-- szövegdoboz -->
     <h3>Szövegdoboz</h3>
@@ -78,10 +81,10 @@
         type="radio"
         name="neme"
         value="fiú"
-        id="flexRadioDefault1"
+        id="fiu"
         v-model="neme"
       />
-      <label class="form-check-label" for="flexRadioDefault1"> Fiú </label>
+      <label class="form-check-label" for="fiu"> Fiú </label>
     </div>
     <div class="form-check">
       <input
@@ -89,18 +92,23 @@
         type="radio"
         name="neme"
         value="lány"
-        id="flexRadioDefault2"
+        id="lany"
         v-model="neme"
       />
-      <label class="form-check-label" for="flexRadioDefault2"> Lány </label>
+      <label class="form-check-label" for="lany"> Lány </label>
     </div>
 
     <!-- range -->
     <h3>Range</h3>
     <label for="range" class="form-label">Example range</label>
-    <input type="range" class="form-range" id="range"
-        :min="min" :max="max" :step="step"
-        v-model="range"
+    <input
+      type="range"
+      class="form-range"
+      id="range"
+      :min="min"
+      :max="max"
+      :step="step"
+      v-model="range"
     />
   </div>
 </template>
@@ -126,6 +134,6 @@ export default {
 
 <style>
 h3 {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 </style>
