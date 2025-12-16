@@ -1,5 +1,5 @@
 <script>
-import Doboz from "../components/DobozAltalanos.vue";
+import Doboz from "@/components/DobozAltalanos.vue";
 export default {
   components: { Doboz },
   data() {
