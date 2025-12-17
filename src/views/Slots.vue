@@ -13,37 +13,32 @@
   >
     <span v-if="szovegMutat">Szöveg eltüntet</span>
     <span v-if="!szovegMutat">Szöveg mutat</span>
-    
   </button>
 
   <!-- //kommunikáció, komponens, kívülről befelé -->
   <!-- belülrőlk kifelé, esemény, eseménykezelő,  -->
   <!-- esemény kiváltása, esemény elkapása -->
   <!-- feliratkozás az eseményre -->
-  <KomponensAlert 
-  :openAlert="openAlert" 
-  @closeAlert="closeAlertKezelo">
+  <KomponensAlert :openAlert="openAlert" @closeAlert="closeAlertKezelo">
     <div>
       <strong>Szerver hiba</strong><br />
       Ptóbálkozzzon később
     </div>
   </KomponensAlert>
 
-  <ModalYesNo 
+  <ModalYesNo
     :title="'Kérdés'"
     :yes="'Igen'"
     :no="'Nem'"
     @valamilyenAkcio="eltuntetMegjelenit"
   >
-  <div v-if="szovegMutat">
-    <h4>Eltüntessem a azöveget? <i class="bi bi-trash3"></i></h4> 
-    
-  </div>
-  <div v-if="!szovegMutat">
-    <h4>Megjelenítsem a azöveget?  <i class="bi bi-magic"></i></h4>
-    
-  </div>
+    <div v-if="szovegMutat">
+      <h4>Eltüntessem a szöveget? <i class="bi bi-trash3"></i></h4>
+    </div>
 
+    <div v-if="!szovegMutat">
+      <h4>Megjelenítsem a szöveget? <i class="bi bi-magic"></i></h4>
+    </div>
   </ModalYesNo>
 </template>
 
@@ -52,18 +47,17 @@ export default {
   data() {
     return {
       openAlert: false,
-      szovegMutat: true
+      szovegMutat: true,
     };
   },
   methods: {
     closeAlertKezelo() {
       this.openAlert = false;
     },
-    eltuntetMegjelenit(){
+    eltuntetMegjelenit() {
       // console.log("eltuntetMegjelenit");
       this.szovegMutat = !this.szovegMutat;
-      
-    }
+    },
   },
 };
 </script>
