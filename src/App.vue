@@ -37,6 +37,7 @@ export default {
         <RouterLink to="/dinamikuskomponens">Dinamikus komponens</RouterLink> |
         <RouterLink to="/slots">Slots</RouterLink> |
         <RouterLink to="/tegla">Tégla</RouterLink> |
+        <RouterLink to="/piniacounter">Pinia counter</RouterLink> |
         <RouterLink to="/listapakolo">Lista pakoló</RouterLink> |
         <RouterLink to="/vslot">v-slot</RouterLink> |
       </div>

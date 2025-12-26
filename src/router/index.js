@@ -44,6 +44,12 @@ const router = createRouter({
       name: 'vslot',
       component: () => import('../views/Vslot.vue'),
       meta: { title: 'vslot'}
+    },
+    {
+      path: '/piniacounter',
+      name: 'piniacounter',
+      component: () => import('../views/PiniaCounterView.vue'),
+      meta: { title: 'Pinia Counter'}
     }
   ]
 })
