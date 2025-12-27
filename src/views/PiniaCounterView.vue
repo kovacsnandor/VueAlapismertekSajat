@@ -1,6 +1,8 @@
 <template>
   <div>
     <h2>Pinia counter</h2>
+    <p>Keresőszó: {{ searchWord }}</p>
+    <p>keresőszó: {{ searchword }}</p>
     <p>
       <button
         type="button"
@@ -32,6 +34,7 @@
 import PiniaCounter from "@/components/PiniaCounter.vue";
 import { mapState, mapActions } from "pinia";
 import { useCounterStore } from "@/stores/counter";
+import { useSearchStore } from "@/stores/search";
 export default {
   components: {
     PiniaCounter,
@@ -49,6 +52,7 @@ export default {
   },
   computed: {
     ...mapState(useCounterStore, ["paddedCount"]),
+    ...mapState(useSearchStore, ["searchWord", "searchword"]),
   },
 };
 </script>

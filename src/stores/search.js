@@ -1,18 +1,20 @@
 import { defineStore } from "pinia";
 
-export const useCounterStore = defineStore("search", {
+export const useSearchStore = defineStore("search", {
   //Ezek a változók
   state: () => ({
-    searchWord: 0,
+    searchWord: null,
   }),
   //valamilyen formában visszaadja
   getters: {
     searchword() {
-      return this.searchWord.toLower();
+      return this.searchWord.toLowerCase();
     },
   },
   //csinál vele valamit
   actions: {
-    
+    reset(){
+        this.searchWord = null;
+    }
   },
 });
