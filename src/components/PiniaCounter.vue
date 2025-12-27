@@ -7,35 +7,46 @@
         class="btn btn-primary"
         @click="onClickButtonIncrement()"
       >
-        {{ counterStore.counter }}
+        {{ counter }}
       </button>
     </p>
     <p>
-      Számlál kettesével:
+      Dupláz:
       <button
         type="button"
         class="btn btn-primary"
         @click="onClickButtonDouble()"
       >
-        {{ counterStore.counter }}
+        {{ counter }}
       </button>
     </p>
 
     <p>
-        Számlál valahogy: 
-              <button
+      Számlál ötösével:
+      <button
         type="button"
         class="btn btn-primary"
         @click="onClickButtonValahogy()"
       >
-        {{ counterStore.counter }}
+        {{ counter }}
       </button>
-
     </p>
+    <p>
+      Reset:
+      <button
+        type="button"
+        class="btn btn-danger"
+        @click="reset()"
+      >
+        {{ counter }}
+      </button>
+    </p>
+    <p>{{ paddedCount }}</p>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "pinia";
 import { useCounterStore } from "@/stores/counter";
 
 export default {
@@ -46,27 +57,36 @@ export default {
     };
   },
   methods: {
+    ...mapActions(useCounterStore, [
+      "addCount",
+      "doubleCount",
+      "increment",
+      "reset",
+    ]),
     onClickButtonIncrement() {
-      this.counterStore.increment();
+      this.increment();
     },
     onClickButtonDouble() {
-      this.counterStore.doubleCount();
+      this.doubleCount();
     },
     onClickButtonValahogy() {
-      this.counterStore.addCount(this.number);
+      this.addCount(this.number);
     },
+  },
+  computed: {
+    ...mapState(useCounterStore, ["counter", "desiredLength", "paddedCount"]),
   },
 };
 </script>
 
 <style scoped>
-    .my-box {
-    width: 250px;
-    /* height: 300px; */
-    border: 1px dashed black;
-    background-color: lightgreen;
-    border-radius: 10px;
-    margin-left: 10px;
-    padding: 10px;
-  }
+.my-box {
+  width: 250px;
+  /* height: 300px; */
+  border: 1px dashed black;
+  background-color: lightgreen;
+  border-radius: 10px;
+  margin-left: 10px;
+  padding: 10px;
+}
 </style>

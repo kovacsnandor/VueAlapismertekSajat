@@ -8,9 +8,12 @@ export const useCounterStore = defineStore("counter", {
   }),
   //valamilyen formában visszaadja
   getters: {
-    paddedCount: (state) => {
-      return state.counter.toString().padStart(state.desiredLength, "0");
+    paddedCount() {
+      return this.counter.toString().padStart(this.desiredLength, "0");
     },
+    // paddedCount: (state) => {
+    //   return state.counter.toString().padStart(state.desiredLength, "0");
+    // },
   },
   //csinál vele valamit
   actions: {
@@ -23,5 +26,8 @@ export const useCounterStore = defineStore("counter", {
     increment() {
       this.counter++;
     },
+    reset(){
+      this.counter = 0;
+    }
   },
 });
