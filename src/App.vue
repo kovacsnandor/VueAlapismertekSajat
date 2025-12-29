@@ -26,7 +26,7 @@ export default {
 
 <template>
   <div class="container-fluid my-border my-container">
-    <h1>Témakör</h1>+
+    <h1>Témakör</h1>
 
     <nav
       class="my-border p-4 d-flex justify-content-between align-items-center"
@@ -38,6 +38,7 @@ export default {
         <RouterLink to="/slots">Slots</RouterLink> |
         <RouterLink to="/tegla">Tégla</RouterLink> |
         <RouterLink to="/piniacounter">Pinia counter</RouterLink> |
+        <RouterLink to="/aichat">AI Chat</RouterLink> |
         <RouterLink to="/listapakolo">Lista pakoló</RouterLink> |
         <RouterLink to="/vslot">v-slot</RouterLink> |
       </div>

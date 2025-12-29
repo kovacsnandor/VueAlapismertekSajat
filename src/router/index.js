@@ -50,6 +50,12 @@ const router = createRouter({
       name: 'piniacounter',
       component: () => import('../views/PiniaCounterView.vue'),
       meta: { title: 'Pinia Counter'}
+    },
+    {
+      path: '/aichat',
+      name: 'aichat',
+      component: () => import('../views/AIChatView.vue'),
+      meta: { title: 'AI Chat'}
     }
   ]
 })

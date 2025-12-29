@@ -1,6 +1,6 @@
 <template>
   <div class="chat-container">
-    <h1>{{ import.meta.env.VITE_APP_TITLE }}</h1>
+    <h1>AI Chat</h1>
 
     <textarea
       v-model="prompt"
@@ -30,8 +30,12 @@ export default {
   methods: {
     async startStreaming() {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      console.log(apiKey);
+
       const ai = new GoogleGenAI({ apiKey });
-      if (!prompt.value) return;
+      if (!this.prompt) {
+        return;
+      }
 
       this.responseText = "";
       this.isLoading = true;
@@ -39,10 +43,11 @@ export default {
       try {
         const response = await ai.models.generateContentStream({
           model: "gemini-2.0-flash",
-          contents: this.prompt,
+          contents: this.prompt
         });
 
         for await (const chunk of response) {
+          console.log("response:", chunk);
           // Itt adjuk hozzá a darabkákat a reaktív változóhoz
           this.responseText += chunk.text;
         }
