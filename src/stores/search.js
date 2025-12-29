@@ -15,6 +15,9 @@ export const useSearchStore = defineStore("search", {
   actions: {
     reset(){
         this.searchWord = null;
+    },
+    setSearchWord(value){
+        this.searchWord = value;
     }
   },
 });

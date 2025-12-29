@@ -26,7 +26,7 @@ export default {
 
 <template>
   <div class="container-fluid my-border my-container">
-    <h1>Témakör</h1>
+    <h1>Témakör</h1>+
 
     <nav
       class="my-border p-4 d-flex justify-content-between align-items-center"
