@@ -6,12 +6,21 @@
       segítségével is
     </p>
 
-    <button type="button" class="btn btn-primary"
+    <button
+      type="button"
+      class="btn btn-primary"
       @click="clickOnButtonValaszt('KomponensG')"
-    >Komponens G</button>
-    <button type="button" class="btn btn-primary ms-2"
+    >
+      Komponens G
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary ms-2"
       @click="clickOnButtonValaszt('KomponensL')"
-    >Komponens L</button>
+    >
+      Komponens L
+    </button>
+    <!-- Ide kerül a komponens dinamikusan -->
     <component :is="betoltottKomponens"></component>
   </div>
 </template>
@@ -29,10 +38,10 @@ export default {
     };
   },
   methods: {
-    clickOnButtonValaszt(komponens){
-      this.betoltottKomponens = komponens
-    }
-  }
+    clickOnButtonValaszt(komponens) {
+      this.betoltottKomponens = komponens;
+    },
+  },
 };
 </script>
 

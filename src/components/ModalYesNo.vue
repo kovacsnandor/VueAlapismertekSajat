@@ -22,17 +22,17 @@
           <slot></slot>
         </div>
         <div class="modal-footer">
-          <button type="button" 
-            class="btn btn-primary" 
-            data-bs-dismiss="modal"
-            >
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
             {{ no }}
           </button>
-          <button type="button" 
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-          @click="onClickYes()"
-          >{{ yes }}</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-dismiss="modal"
+            @click="onClickYes()"
+          >
+            {{ yes }}
+          </button>
         </div>
       </div>
     </div>
@@ -41,12 +41,16 @@
 
 <script>
 export default {
-  props: ["title", "yes", "no"],
+  props: {
+    title: { type: String, default: "El akarod tüntetni?" },
+    yes: { type: String, default: "yes" },
+    no: { type: String, default: "no" },
+  },
   methods: {
-    onClickYes(){
-        this.$emit('valamilyenAkcio')
-    }
-  }
+    onClickYes() {
+      this.$emit("valamilyenAkcio");
+    },
+  },
 };
 </script>
 
