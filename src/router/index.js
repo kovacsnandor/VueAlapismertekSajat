@@ -22,6 +22,12 @@ const router = createRouter({
       meta: { title: 'Dinamikus'}
     },
     {
+      path: '/inputcomponents',
+      name: 'inputcomponents',
+      component: () => import('../views/InputComponentsView.vue'),
+      meta: { title: 'Input komponens'}
+    },
+    {
       path: '/slots',
       name: 'slots',
       component: () => import('../views/Slots.vue'),

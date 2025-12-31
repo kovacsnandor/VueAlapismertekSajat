@@ -49,6 +49,7 @@ export default {
         <RouterLink to="/">Home</RouterLink> |
         <RouterLink to="/globaliskomponens">Globális komponens</RouterLink> |
         <RouterLink to="/dinamikuskomponens">Dinamikus komponens</RouterLink> |
+        <RouterLink to="/inputcomponents">Input komponens</RouterLink> |
         <RouterLink to="/slots">Slots</RouterLink> |
         <RouterLink to="/tegla">Tégla</RouterLink> |
         <RouterLink to="/piniacounter">Pinia counter</RouterLink> |
