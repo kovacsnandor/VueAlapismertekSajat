@@ -2,6 +2,10 @@
 import { RouterLink, RouterView } from "vue-router";
 import { computed } from "vue";
 
+//Keresőszó tárolása a search.js store-ban
+import { mapState, mapActions } from "pinia";
+import { useSearchStore } from "@/stores/search";
+
 export default {
   provide() {
     return {
@@ -9,10 +13,14 @@ export default {
     };
   },
   watch: {
-    searchWordInput(data){
-      if (!data) {
+    searchWordInput(newValue){
+      if (!newValue) {
         this.searchWord = null;
+        //search store metódusa:
+        this.reset();
+        return
       }
+      this.setSearchWord(newValue);
     }
   },
   data() {
@@ -21,6 +29,12 @@ export default {
       searchWordInput: null,
     };
   },
+  computed: {
+    ...mapState(useSearchStore, ['searchWord', 'searchword']),
+  },
+  methods: {
+    ...mapActions(useSearchStore, ['reset', 'setSearchWord']),
+  }
 };
 </script>
 

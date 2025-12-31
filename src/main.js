@@ -15,7 +15,7 @@ import "bootstrap-icons/font/bootstrap-icons.min.css"
 const app = createApp(App)
 
 //Globális komponensek
-import KomponensG from './components/KomponensG.vue';
+import KomponensG from '@/components/GlobalisKomponens/KomponensG.vue';
 import KomponensAlert from './components/KomponensAlert.vue'
 import ModalYesNo from './components/ModalYesNo.vue'
 app.component('KomponensG', KomponensG);

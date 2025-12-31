@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import KomponensL from '@/components/KomponensL.vue';
+import KomponensL from '@/components/GlobalisKomponens/KomponensL.vue';
 export default {
     components: {
         KomponensL

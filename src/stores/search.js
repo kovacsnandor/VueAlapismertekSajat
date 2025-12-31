@@ -8,7 +8,7 @@ export const useSearchStore = defineStore("search", {
   //valamilyen formában visszaadja
   getters: {
     searchword() {
-      return this.searchWord.toLowerCase();
+      return (this.searchWord ? this.searchWord : '').toLowerCase();
     },
   },
   //csinál vele valamit

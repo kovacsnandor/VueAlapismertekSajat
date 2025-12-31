@@ -45,12 +45,16 @@ export default {
     };
   },
   methods: {
+    //Közvetlenül hívhatjuk a counter store akcióit
     ...mapActions(useCounterStore, ["increment", "reset"]),
     onClickButtonIncrement() {
-      this.increment();
+      //this.increment();
+      //Így is lehet:
+      //this.counterStore.increment()
     },
   },
   computed: {
+    //hozzáférhetünk a store gettereihez, vagy változóihoz
     ...mapState(useCounterStore, ["paddedCount"]),
     ...mapState(useSearchStore, ["searchWord", "searchword"]),
   },
