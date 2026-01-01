@@ -40,6 +40,12 @@ const router = createRouter({
       meta: { title: 'Tégla'}
     },
     {
+      path: '/komponenskommunikacio',
+      name: 'komponenskommunikacio',
+      component: () => import('../views/KomponensKommunikacio.vue'),
+      meta: { title: 'Komponens kommunikáció'}
+    },
+    {
       path: '/listapakolo',
       name: 'listapakolo',
       component: () => import('../views/ListaPakolo.vue'),

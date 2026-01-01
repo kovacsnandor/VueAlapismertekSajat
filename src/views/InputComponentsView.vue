@@ -19,7 +19,10 @@
     <!-- A v-model-nek meg kell mondani, hogy melyik props-ra gondolsz
       mert lehet akár több props is: v-model:text=...
     -->
-    <InputComponent v-model:text="text" :label="'Komponens v-model'" />
+    <InputComponent 
+      v-model:text="text" 
+      :label="'Komponens v-model'" 
+    />
 
     <!-- A vmodel valójában ezt csinálja: -->
     <InputComponent
