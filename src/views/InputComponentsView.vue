@@ -20,14 +20,14 @@
       mert lehet akár több props is: v-model:text=...
     -->
     <InputComponent 
-      v-model:text="text" 
+      v-model="text" 
       :label="'Komponens v-model'" 
     />
 
     <!-- A vmodel valójában ezt csinálja: -->
     <InputComponent
-      :text="text"
-      @update:text="text = $event"
+      :modelValue="text"
+      @update:modelValue="text = $event"
       :label="'Komponens másik módszerrel'"
     />
   </div>

@@ -10,8 +10,8 @@
       type="text"
       class="form-control"
       id="text"
-      :value="text"
-      @input="$emit('update:text', $event.target.value)"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
@@ -19,7 +19,7 @@
 <script>
 export default {
   props: {
-    text: { type: String, default: "" },
+    modelValue: { type: String, default: "" },
     label: { type: String, default: "Text" },
   },
 };
