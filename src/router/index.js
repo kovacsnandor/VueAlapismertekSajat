@@ -46,6 +46,12 @@ const router = createRouter({
       meta: { title: 'Komponens kommunikáció'}
     },
     {
+      path: '/szorzogep',
+      name: 'szorzogep',
+      component: () => import('../views/SzorzogepView.vue'),
+      meta: { title: 'Szorzógép'}
+    },
+    {
       path: '/listapakolo',
       name: 'listapakolo',
       component: () => import('../views/ListaPakolo.vue'),

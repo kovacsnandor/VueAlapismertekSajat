@@ -49,9 +49,10 @@ export default {
         <RouterLink to="/">Home</RouterLink> |
         <RouterLink to="/globaliskomponens">Globális komponens</RouterLink> |
         <RouterLink to="/dinamikuskomponens">Dinamikus komponens</RouterLink> |
+        <RouterLink to="/komponenskommunikacio">Komponens kommunikáció</RouterLink> |
+        <RouterLink to="/szorzogep">Szorzógép</RouterLink> |
         <RouterLink to="/slots">Slots</RouterLink> |
         <RouterLink to="/tegla">Tégla</RouterLink> | <br>
-        <RouterLink to="/komponenskommunikacio">Komponens kommunikáció</RouterLink> |
         <RouterLink to="/inputcomponents">Input komponens</RouterLink> |
         <RouterLink to="/piniacounter">Pinia counter</RouterLink> | <br>
         <RouterLink to="/aichat">AI Chat</RouterLink> |

@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       teglak: ["tegla.jpg", "tegla.jpg", "tegla.jpg"],
+      tegla: "tegla.jpg",
       teglaKivesz: null
     };
   },
@@ -65,7 +66,7 @@ export default {
       if (this.teglaKivesz) {
         this.teglak.pop();
       } else {
-        this.teglak.push("tegla.jpg");
+        this.teglak.push(this.tegla);
       }
     },
   },
