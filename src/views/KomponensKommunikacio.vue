@@ -48,7 +48,7 @@
       <!-- Gyerek doboz -->
       <div class="col">
         <hr class="border border-success border-5 opacity-75 mb-0" />
-        <h2>Gyerek</h2>
+        <h3>Gyerek</h3>
         <Doboz
           :kicsoda="'Pisti'"
           :uzenetSzulotol="uzenetGyereknek"

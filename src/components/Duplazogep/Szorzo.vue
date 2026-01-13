@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     onClickSzorKettoButton() {
-      this.$emit("duplazas", this.szam * 2);
+      this.$emit("szorzas", this.szam * 2);
     },
   },
 };

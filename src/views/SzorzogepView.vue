@@ -20,7 +20,7 @@
   <!-- duplázó -->
   <Szorzo class="my-border p-3 mt-2"
     :szam="szam"
-    @duplazas="duplazasHandler"
+    @szorzas="duplazasHandler"
   />
 </template>
 
