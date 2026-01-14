@@ -8,8 +8,7 @@
   <button
     type="button"
     class="btn btn-primary ms-2"
-    data-bs-toggle="modal"
-    data-bs-target="#modalYesNo"
+    @click="this.$refs.modalYesNo.show()"
   >
     <span v-if="szovegMutat">Szöveg eltüntet</span>
     <span v-if="!szovegMutat">Szöveg mutat</span>
@@ -27,6 +26,7 @@
   </KomponensAlert>
 
   <ModalYesNo
+    ref="modalYesNo"
     :title="'Kérdés'"
     :yes="'Igen'"
     :no="'Nem'"

@@ -3,6 +3,7 @@
   <div
     class="modal fade"
     id="modalYesNo"
+    ref="modalYesNo"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -14,22 +15,22 @@
           <button
             type="button"
             class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
+            @click="hide(); $event.target.blur()"
           ></button>
         </div>
         <div class="modal-body">
           <slot></slot>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-primary"
+            @click="hide(); $event.target.blur()"
+          >
             {{ no }}
           </button>
           <button
             type="button"
             class="btn btn-danger"
-            data-bs-dismiss="modal"
-            @click="onClickYes()"
+            @click="onClickYes(); $event.target.blur()"
           >
             {{ yes }}
           </button>
@@ -40,19 +41,34 @@
 </template>
 
 <script>
+import { Modal } from "bootstrap";
 export default {
   props: {
     title: { type: String, default: "El akarod tüntetni?" },
     yes: { type: String, default: "yes" },
     no: { type: String, default: "no" },
   },
+  data() {
+    return {
+      modal: null,
+    };
+  },
+  mounted() {
+    this.modal = new Modal(this.$refs.modalYesNo);
+  },
   methods: {
     onClickYes() {
       this.$emit("valamilyenAkcio");
+      this.hide();
+    },
+    show() {
+      this.modal.show();
+    },
+    hide() {
+      this.modal.hide();
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
